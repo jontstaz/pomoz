@@ -9,8 +9,11 @@ import Settings from "./components/settings";
 import TodoPage from "./components/todoPage.jsx";
 
 import { switchTheme } from "./utils";
-import { render } from "preact";
-import { Route } from "wouter-preact";
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { Route } from "wouter";
 
 function App() {
   return (
@@ -37,7 +40,7 @@ function App() {
   ? switchTheme("light")
   : switchTheme(localStorage.theme);
 
-render(
+ReactDOM.render(
   <App />,
   document.getElementById("app"),
 );

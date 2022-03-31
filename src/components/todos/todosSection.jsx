@@ -5,10 +5,10 @@ import { projects } from "../../store";
 import { view } from "@risingstack/react-easy-state";
 
 export default view(() => (
-  <main class="todoSection">
+  <main className="todoSection">
     <TodoList />
 
-    <div class="todoFooter">
+    <div className="todoFooter">
       {(projects.clickedProject != "Important" &&
         projects.clickedProject != "Low priority") &&
         (

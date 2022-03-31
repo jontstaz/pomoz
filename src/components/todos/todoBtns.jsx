@@ -5,7 +5,7 @@ import { removeProjectTodos } from "./project";
 const RemoveAllTodos = () => {
   return (
     <button
-      class="removeTodosBtn"
+      className="removeTodosBtn"
       onClick={() => removeProjectTodos(projects.clickedProject)}
     >
       <Trash size={21} weight="fill" />Todos

@@ -17,14 +17,14 @@ function ChangeHrsBtns() {
   }
 
   return (
-    <div class="adjustGoal">
+    <div className="adjustGoal">
       <CaretCircleUp
-        class="changeHrsBtn"
+        className="changeHrsBtn"
         weight="fill"
         onClick={() => alterValues("add")}
       />
       <CaretCircleDown
-        class="changeHrsBtn"
+        className="changeHrsBtn"
         weight="fill"
         onClick={() => alterValues("min")}
       />
@@ -34,11 +34,11 @@ function ChangeHrsBtns() {
 
 function ProjectedGoal(props) {
   return (
-    <div class="projectedGoal">
+    <div className="projectedGoal">
       <h3>Target Goal</h3>
 
-      <div class="projectedGoalContent">
-        <div class="projectedGoalText">
+      <div className="projectedGoalContent">
+        <div className="projectedGoalText">
           {props.hours} hrs
         </div>
         <ChangeHrsBtns />
@@ -67,7 +67,7 @@ function getCurrentProgress() {
 
 function CurrentProgress() {
   return (
-    <div class="currentProgress">
+    <div className="currentProgress">
       <RadialProgress
         value={getCurrentProgress()}
         text={`${minToHrs(getCurrentGoal(), 2)} hrs`}
@@ -78,7 +78,7 @@ function CurrentProgress() {
 }
 
 export default view(() => (
-  <div class="goalWidgets">
+  <div className="goalWidgets">
     <ProjectedGoal hours={targetHours.val} />
     <CurrentProgress />
   </div>

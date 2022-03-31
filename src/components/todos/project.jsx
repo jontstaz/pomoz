@@ -30,12 +30,12 @@ const removeProject = (item) => {
 
 export default view((props) => (
   <div
-    class={projects.clickedProject == props.name
+    className={projects.clickedProject == props.name
       ? "todoProject todoProjectClicked"
       : "todoProject"}
     onClick={() => projects.clickedProject = props.name}
   >
-    <div class="projectName">
+    <div className="projectName">
       <props.icon
         size={20}
         style={{ color: getColor(props.color) }}

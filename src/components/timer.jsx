@@ -122,8 +122,8 @@ export function RadialProgress(props) {
 // Timer
 
 export default view(() => (
-  <main class="timer">
-    <div class="MainCircle">
+  <main className="timer">
+    <div className="MainCircle">
       <RadialProgress
         value={timer.progress}
         text={timer.timeInText}
@@ -132,15 +132,15 @@ export default view(() => (
       />
     </div>
 
-    <div class="sessionBtns">
+    <div className="sessionBtns">
       {timer.playBtn &&
-        <Play onClick={start} class="playBtn" size={24} />}
+        <Play onClick={start} className="playBtn" size={24} />}
       {!timer.playBtn &&
-        <Pause onClick={pause} class="playBtn" size={24} />}
+        <Pause onClick={pause} className="playBtn" size={24} />}
 
       <ArrowClockwise
         onClick={reset}
-        class="resetBtn"
+        className="resetBtn"
         size={24}
       />
     </div>

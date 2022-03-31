@@ -6,8 +6,8 @@ function Settings() {
     <>
       <h1>Settings</h1>
 
-      <main class="settings">
-        <div class="miscWidgets">
+      <main className="settings">
+        <div className="miscWidgets">
           <VolumeSlider />
           <GoalCounter />
         </div>

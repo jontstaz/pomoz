@@ -24,16 +24,16 @@ const removeTodo = (name) => {
 };
 
 export default view((props) => (
-  <div class="todo">
+  <div className="todo">
     <div
-      class={FinishedStatus(props.name, "get")
+      className={FinishedStatus(props.name, "get")
         ? "todoTitle checkedTodo"
         : "todoTitle"}
     >
       {props.name}
     </div>
     <div
-      class={FinishedStatus(props.name, "get") ? "todoNote checkedTodo"
+      className={FinishedStatus(props.name, "get") ? "todoNote checkedTodo"
       : "todoNote"}
     >
       {props.note}
@@ -47,7 +47,7 @@ export default view((props) => (
               weight="bold"
               size={20}
               onClick={() => FinishedStatus(props.name, "set", true)}
-              class="unchecked"
+              className="unchecked"
             />
           )
           : (
@@ -55,13 +55,13 @@ export default view((props) => (
               weight="fill"
               size={20}
               onClick={() => FinishedStatus(props.name, "set", false)}
-              class="checked"
+              className="checked"
             />
           )}
         <XCircle
           weight="fill"
           size={20}
-          class="closeTodoBtn"
+          className="closeTodoBtn"
           onClick={() => removeTodo(props.name)}
         />
       </div>

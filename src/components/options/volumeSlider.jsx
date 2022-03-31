@@ -19,7 +19,7 @@ export default view(() => (
         value={volume.value}
         onInput={handleRange}
       />
-      <div class="volumePercentage">
+      <div className="volumePercentage">
         {volume.value}
       </div>
     </div>

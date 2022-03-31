@@ -26,7 +26,7 @@ function ProjectInput() {
   }
 
   return (
-    <form action="" method="get" class="projectInput">
+    <form action="" method="get" className="projectInput">
       <input
         type="text"
         placeholder="project name"
@@ -34,13 +34,13 @@ function ProjectInput() {
         onChange={(e) => tmpProject = e.target.value}
       />
 
-      <div class="projectInputBtns">
+      <div className="projectInputBtns">
         <button onClick={() => addProject()}>
           save
         </button>
 
         <XCircle
-          class="closeProjectInput"
+          className="closeProjectInput"
           size={20}
           weight="fill"
           onClick={() => showInput(false)}
@@ -51,8 +51,8 @@ function ProjectInput() {
 }
 
 export default view(() => (
-  <div class="sidebar">
-    <div class="projects">
+  <div className="sidebar">
+    <div className="projects">
       <ProjectLists />
     </div>
 
@@ -60,7 +60,7 @@ export default view(() => (
       {projects.showInputBox &&
         <ProjectInput closeInput={() => showInput(false)} />}
 
-      <button class="newProjectBtn" onClick={() => showInput(true)}>
+      <button className="newProjectBtn" onClick={() => showInput(true)}>
         <PlusCircle size={21} weight="fill" /> Add Project
       </button>
     </div>

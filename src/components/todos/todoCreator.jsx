@@ -10,7 +10,7 @@ const inputbox = store({
 function NewTodoBtn() {
   return (
     <button
-      class="newTodoBtn"
+      className="newTodoBtn"
       onClick={() => inputbox.show = true}
     >
       <PlusCircle size={21} weight="fill" /> Todo
@@ -52,11 +52,11 @@ function TodoInput() {
   }
 
   return (
-    <form action="" method="get" class="todoInput">
+    <form action="" method="get" className="todoInput">
       <XCircle
         size={20}
         weight="fill"
-        class="closeTodoInput"
+        className="closeTodoInput"
         onClick={() => inputbox.show = false}
       />
 
@@ -78,7 +78,7 @@ function TodoInput() {
       </textarea>
 
       <div style={{ display: "flex", gap: ".5rem" }}>
-        <div class="todoPriority">
+        <div className="todoPriority">
           <label for="priority">priority</label>
 
           <select
@@ -91,7 +91,7 @@ function TodoInput() {
           </select>
         </div>
 
-        <button class="newProjectBtn" onClick={() => saveTodo(todo)}>
+        <button className="newProjectBtn" onClick={() => saveTodo(todo)}>
           save
         </button>
       </div>
@@ -100,7 +100,7 @@ function TodoInput() {
 }
 
 export default view(() => (
-  <div class="todoCreator">
+  <div className="todoCreator">
     {inputbox.show &&
       <TodoInput />}
     <NewTodoBtn />

@@ -1,5 +1,5 @@
-import { useState } from "preact/hooks";
-import { Link } from "wouter-preact";
+import { useState } from "react";
+import { Link } from "wouter";
 import { switchTheme } from "../utils";
 
 import { Ghost, MoonStars, Nut, Target, User } from "phosphor-react";
@@ -8,10 +8,10 @@ import "../css/navbar.css";
 
 function BrandInfo() {
   return (
-    <div class="brand">
-      <Target class="brandLogo" size={30} weight="fill" />
+    <div className="brand">
+      <Target className="brandLogo" size={30} weight="fill" />
       <Link href="/">
-        <div class="brandTitle">Pomochad</div>
+        <div className="brandTitle">Pomochad</div>
       </Link>
     </div>
   );
@@ -35,29 +35,29 @@ function NavbarLinks() {
   }
 
   return (
-    <div class="navBtns">
+    <div className="navBtns">
       <MoonStars
-        class="themeToggle"
+        className="themeToggle"
         size={26}
         onClick={() => addTheme()}
       />
 
-      <div class="navbarLinks">
+      <div className="navbarLinks">
         <Link href="/todos">
-          <div class="todosBtn">
-            <Ghost class="todosIcon" size={23} />
+          <div className="todosBtn">
+            <Ghost className="todosIcon" size={23} />
             Todos
           </div>
         </Link>
 
         <User
-          class="userIcon"
+          className="userIcon"
           size={23}
           onClick={() => alert("WIP! data stored in localstorage for now")}
         />
 
         <Link href="/settings">
-          <Nut class="settingsBtn" size={25} />
+          <Nut className="settingsBtn" size={25} />
         </Link>
       </div>
     </div>
@@ -66,7 +66,7 @@ function NavbarLinks() {
 
 function Navbar() {
   return (
-    <nav class="navbar">
+    <nav className="navbar">
       <BrandInfo />
       <NavbarLinks />
     </nav>
