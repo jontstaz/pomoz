@@ -84,6 +84,7 @@
   border: none;
   background: var(--btnBg);
   color: var(--btnFg);
+  font-family: "Dosis", sans-serif;
   justify-content: center;
   border-radius: 0.5rem;
   margin-top: 1rem;
