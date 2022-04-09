@@ -41,6 +41,10 @@
   cursor: pointer;
 }
 
+.navbarLinks > * {
+  transition: all 90ms;
+}
+
 .themeToggle,
 .userIcon {
   border-radius: 50%;
