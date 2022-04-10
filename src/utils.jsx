@@ -1,15 +1,9 @@
 import { volume } from "./store";
 
 function numToText(min, sec) {
-  let temp;
-
-  if (min < 10) temp = `0${min} : ${sec}`;
-  else if (sec < 10) temp = `${min} : 0${sec}`;
-  else {
-    temp = `${min} : ${sec}`;
-  }
-
-  return temp;
+  if (min < 10) min = `0${min}`;
+  if (sec < 10) sec = `0${sec}`;
+  return `${min} : ${sec}`;
 }
 
 function setProgressValue(ogTime, newTime) {
@@ -18,16 +12,15 @@ function setProgressValue(ogTime, newTime) {
   return timeProgres;
 }
 
-const playSound = (path) => {
+function playSound(path) {
   let n = document.querySelector("audio");
   n.setAttribute("src", path);
   n.volume = volume.value / 100;
   n.play();
 };
 
-export function switchTheme(name) {
-  let body = document.querySelector("body");
-  body.setAttribute("data-theme", name);
+function switchTheme(name) {
+  document.body.dataset.theme = name;
   localStorage.setItem("theme", name);
 }
 
@@ -38,4 +31,4 @@ let progressBar = {
   pathTransitionDuration: 0.3,
 };
 
-export { numToText, playSound, progressBar, setProgressValue };
+export { numToText, playSound, progressBar, switchTheme, setProgressValue };
