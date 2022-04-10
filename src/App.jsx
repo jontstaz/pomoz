@@ -10,8 +10,8 @@ import TodoPage from "./components/todoPage.jsx";
 
 import { switchTheme } from "./utils";
 
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import { Route } from "wouter";
 
@@ -40,7 +40,5 @@ function App() {
   ? switchTheme("light")
   : switchTheme(localStorage.theme);
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("app"),
-);
+const root = ReactDOM.createRoot(document.getElementById("app"));
+root.render(<App />);
