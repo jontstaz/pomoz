@@ -1,6 +1,7 @@
 import { CaretCircleDown, CaretCircleUp } from "phosphor-react";
 import { store, view } from "@risingstack/react-easy-state";
-import { RadialProgress, timer } from "../timer";
+import RadialBar from "../radialBar";
+import { timer } from "../timer";
 
 // Desired goal i.e number of hours the user wants to be productive per day
 const targetHours = store({
@@ -46,6 +47,7 @@ function ProjectedGoal(props) {
     </div>
   );
 }
+
 function getCurrentGoal() {
   return parseFloat(
     timer.todaysProgress /
@@ -67,13 +69,12 @@ function getCurrentProgress() {
 
 function CurrentProgress() {
   return (
-    <div className="currentProgress">
-      <RadialProgress
-        value={getCurrentProgress()}
-        text={`${minToHrs(getCurrentGoal(), 2)} hrs`}
-        strokeWidth={5}
-      />
-    </div>
+    <RadialBar
+      percentage={getCurrentProgress()}
+      innerText={`${minToHrs(getCurrentGoal(), 2)} hrs`}
+      strokeWidth={6}
+      mainClass="goalProgress"
+    />
   );
 }
 

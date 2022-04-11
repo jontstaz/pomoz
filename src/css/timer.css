@@ -8,7 +8,6 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 15rem;
-  height: 15rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -18,17 +17,18 @@
   background-color: var(--bg-alt);
 }
 
-.CircularProgressbar .CircularProgressbar-trail {
+.MainCircle path:nth-child(1) {
   stroke: var(--inactiveStroke);
 }
 
-.CircularProgressbar .CircularProgressbar-text {
-  fill: var(--timerfg);
-  font-family: "Quicksand", sans-serif;
+.MainCircle path:nth-child(2) {
+  stroke: var(--activeStroke);
 }
 
-.CircularProgressbar .CircularProgressbar-path {
-  stroke: var(--activeStroke);
+.MainCircle text {
+  fill: var(--timerfg);
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.3rem;
 }
 
 /* SESSION BTNS like play , reset */
@@ -67,10 +67,9 @@
   cursor: pointer;
 }
 
-
 @media screen and (min-width: 1460px) {
- .MainCircle {
-   width: 16rem;
-   height: 16rem;
- }  
+  .MainCircle {
+    width: 16rem;
+    height: 16rem;
+  }
 }

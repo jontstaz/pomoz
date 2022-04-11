@@ -1,14 +1,15 @@
 import { store, view } from "@risingstack/react-easy-state";
 import { ArrowClockwise, Pause, Play } from "phosphor-react";
-import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
 import "../css/timer.css";
 
-import { numToText, playSound, progressBar, setProgressValue } from "../utils";
+import { numToText, playSound, setProgressValue } from "../utils";
 
 import tickSound from "../../assets/audio/tick.mp3";
 import timerSound from "../../assets/audio/timerSound.mp3";
+
+import RadialBar from "./radialBar";
 
 export const timer = store({
   timeInText: "25 : 00",
@@ -57,7 +58,7 @@ function update() {
 
 function run(action) {
   currentClick = action;
-  interval = setInterval(update, 1000);
+  interval = setInterval(update, 0);
 
   if (action == "start" || action == "resume") timer.playBtn = false;
   action == "start" ? playSound(tickSound) : (pomoTime = pausedTime);
@@ -108,30 +109,8 @@ function reset() {
   timer.playBtn = true;
 }
 
-export function RadialProgress(props) {
+function SessionBtns() {
   return (
-    <CircularProgressbar
-      value={props.value}
-      text={props.text}
-      styles={buildStyles(progressBar)}
-      strokeWidth={props.strokeWidth}
-    />
-  );
-}
-
-// Timer
-
-export default view(() => (
-  <main className="timer">
-    <div className="MainCircle">
-      <RadialProgress
-        value={timer.progress}
-        text={timer.timeInText}
-        styles={buildStyles(progressBar)}
-        strokeWidth={6}
-      />
-    </div>
-
     <div className="sessionBtns">
       {timer.playBtn &&
         <Play onClick={start} className="playBtn" size={24} />}
@@ -144,5 +123,19 @@ export default view(() => (
         size={24}
       />
     </div>
+  );
+}
+
+// Timer
+
+export default view(() => (
+  <main className="timer">
+    <RadialBar
+      strokeWidth={6}
+      percentage={timer.progress}
+      innerText={timer.timeInText}
+      mainClass="MainCircle"
+    />
+    <SessionBtns />
   </main>
 ));

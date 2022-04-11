@@ -17,18 +17,11 @@ function playSound(path) {
   n.setAttribute("src", path);
   n.volume = volume.value / 100;
   n.play();
-};
+}
 
 function switchTheme(name) {
   document.body.dataset.theme = name;
   localStorage.setItem("theme", name);
 }
 
-let progressBar = {
-  rotation: 0.25,
-  strokeLinecap: "butt",
-  textSize: "1.2rem",
-  pathTransitionDuration: 0.3,
-};
-
-export { numToText, playSound, progressBar, switchTheme, setProgressValue };
+export { numToText, playSound, setProgressValue, switchTheme };
