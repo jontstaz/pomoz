@@ -1,7 +1,6 @@
 import { store, view } from "@risingstack/react-easy-state";
 import { ArrowClockwise, Pause, Play } from "phosphor-react";
 
-import "react-circular-progressbar/dist/styles.css";
 import "../css/timer.css";
 
 import { numToText, playSound, setProgressValue } from "../utils";
