@@ -1,5 +1,7 @@
-import { store, view } from "@risingstack/react-easy-state";
-import { ArrowClockwise, Pause, Play } from "phosphor-react";
+import { AiOutlinePause } from "solid-icons/ai";
+import { VscDebugRestart,VscDebugStart } from 'solid-icons/vsc'
+
+import { createStore } from "solid-js/store";
 
 import "../css/timer.css";
 
@@ -10,12 +12,14 @@ import timerSound from "../../assets/audio/timerSound.mp3";
 
 import RadialBar from "./radialBar";
 
-export const timer = store({
-  timeInText: "25 : 00",
-  progress: 0,
-  playBtn: true,
-  todaysProgress: 0,
-});
+const [store, setStore] = createStore(
+  {
+    timeInText: "25 : 00",
+    progress: 0,
+    playBtn: true,
+    todaysProgress: 0,
+  },
+);
 
 const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
 
@@ -25,7 +29,7 @@ if (!localStorage.date || localStorage.date != utc) {
 }
 
 if (localStorage.date == utc && localStorage.todaysProgress) {
-  timer.todaysProgress = parseInt(localStorage.todaysProgress);
+  setStore("todaysProgress", parseInt(localStorage.todaysProgress));
 }
 
 export let interval, pausedTime, currentClick;
@@ -36,22 +40,23 @@ function update() {
     playSound(timerSound);
     clearInterval(interval);
 
-    timer.timeInText = numToText(0, 0);
-    timer.progress = 100;
-    timer.playBtn = true;
+    setStore("timeInText", numToText(0, 0));
+    setStore("progress", 100);
+    setStore("playBtn", true);
 
     document.title = "Pomochad";
 
-    timer.todaysProgress += totalTime;
-    localStorage.setItem("todaysProgress", timer.todaysProgress);
+    setStore("todaysProgress", +totalTime);
+    localStorage.setItem("todaysProgress", store.todaysProgress);
   }
 
   const min = Math.floor(pomoTime / 60);
   const sec = pomoTime % 60;
 
-  timer.timeInText = numToText(min, sec);
+  setStore("timeInText", numToText(min, sec));
+
   document.title = numToText(min, sec);
-  timer.progress = setProgressValue(totalTime, pomoTime);
+  setStore("progress", setProgressValue(totalTime, pomoTime));
   pomoTime--;
 }
 
@@ -59,7 +64,7 @@ function run(action) {
   currentClick = action;
   interval = setInterval(update, 1000);
 
-  if (action == "start" || action == "resume") timer.playBtn = false;
+  if (action == "start" || action == "resume") setStore("playBtn", false);
   action == "start" ? playSound(tickSound) : (pomoTime = pausedTime);
 }
 
@@ -83,16 +88,16 @@ function pause() {
   currentClick = "pause";
   pausedTime = pomoTime;
 
-  timer.progress = setProgressValue(totalTime, pausedTime);
+  setStore("progress", setProgressValue(totalTime, pausedTime));
 
   const min = Math.floor(pausedTime / 60);
   const sec = pausedTime % 60;
 
-  timer.timeInText = numToText(min, sec);
+  setStore("timeInText", numToText(min, sec));
 
   pomoTime = 0;
   clearInterval(interval);
-  timer.playBtn = true;
+  setStore("playBtn", true);
 }
 
 function reset() {
@@ -101,24 +106,24 @@ function reset() {
   clearInterval(interval);
   currentClick = "reset";
 
-  timer.progress = 0;
-  timer.timeInText = `${totalTime} : 00`;
+  setStore("progress", 0);
+  setStore("timeInText", `${totalTime} : 00`);
 
   pomoTime = totalTime * 60;
-  timer.playBtn = true;
+  setStore("playBtn", true);
 }
 
 function SessionBtns() {
   return (
-    <div className="sessionBtns">
-      {timer.playBtn &&
-        <Play onClick={start} className="playBtn" size={24} />}
-      {!timer.playBtn &&
-        <Pause onClick={pause} className="playBtn" size={24} />}
+    <div class="sessionBtns">
+      {store.playBtn &&
+        <VscDebugStart onClick={start} class="playBtn" size={24} />}
+      {!store.playBtn &&
+        <AiOutlinePause onClick={pause} class="playBtn" size={24} />}
 
-      <ArrowClockwise
+      <VscDebugRestart
         onClick={reset}
-        className="resetBtn"
+        class="resetBtn"
         size={24}
       />
     </div>
@@ -126,15 +131,16 @@ function SessionBtns() {
 }
 
 // Timer
-
-export default view(() => (
-  <main className="timer">
-    <RadialBar
-      strokeWidth={6}
-      percentage={timer.progress}
-      innerText={timer.timeInText}
-      mainClass="MainCircle"
-    />
-    <SessionBtns />
-  </main>
-));
+export default function Timer() {
+  return (
+    <main class="timer">
+      <RadialBar
+        strokeWidth={6}
+        percentage={store.progress}
+        innerText={store.timeInText}
+        mainClass="MainCircle"
+      />
+      <SessionBtns />
+    </main>
+  );
+}

@@ -4,7 +4,7 @@ import "./css/animations.css";
 
 // components
 import Navbar from "./components/navbar";
-// import Timer from "./components/timer";
+import Timer from "./components/timer";
 // import Settings from "./components/settings";
 // import TodoPage from "./components/todoPage.jsx";
 
@@ -17,6 +17,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <Timer />
     </>
   );
 }

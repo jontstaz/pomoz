@@ -1,4 +1,4 @@
-function RadialBar({ strokeWidth, percentage, mainClass, innerText }) {
+export default ({ strokeWidth, percentage, mainClass, innerText }) => {
   const radius = (50 - strokeWidth / 2);
 
   const pathDescription = `
@@ -8,41 +8,34 @@ function RadialBar({ strokeWidth, percentage, mainClass, innerText }) {
     `;
 
   const diameter = Math.PI * 2 * radius;
-  const progressStyle = {
-    strokeDasharray: `${diameter}px ${diameter}px`,
-    strokeDashoffset: `${((100 - percentage) / 100 * diameter)}px`,
-  };
 
   return (
     <svg
-      className={mainClass}
+      class={mainClass}
       viewBox="0 0 100 100"
     >
       <path
         d={pathDescription}
-        strokeWidth={strokeWidth}
+        stroke-width={strokeWidth}
         fillOpacity={0}
       />
 
       <path
         d={pathDescription}
-        strokeWidth={strokeWidth}
-        fillOpacity={0}
-        style={progressStyle}
+        stroke-width={strokeWidth}
+        fill-opacity={0}
+        style={{
+          "stroke-dasharray": `${diameter}px ${diameter}px`,
+          "stroke-dashoffset": `${((100 - percentage) / 100 * diameter)}px`,
+        }}
       />
 
       <text
         x={50}
         y={50}
-        style={{
-          dominantBaseline: "central",
-          textAnchor: "middle",
-        }}
       >
         {innerText}
       </text>
     </svg>
   );
-}
-
-export default RadialBar;
+};
