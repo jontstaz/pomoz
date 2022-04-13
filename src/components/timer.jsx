@@ -49,6 +49,9 @@ function update() {
     clearInterval(interval);
 
     localStorage.setItem("todaysProgress", store.todaysProgress);
+
+    document.title = "Time's up!";
+    return;
   }
 
   const min = Math.floor(pomoTime / 60);
@@ -63,7 +66,7 @@ function update() {
 
 function run(action) {
   currentClick = action;
-  interval = setInterval(update, 1000);
+  interval = setInterval(update, 0);
 
   if (action == "start" || action == "resume") {
     store.playBtn = false;
@@ -112,6 +115,7 @@ function reset() {
 
   store.progress = 0;
   store.playBtn = true;
+  store.timeInText = `${totalTime} : 00`;
 }
 
 function ActionBtns() {
@@ -147,9 +151,6 @@ export default () => {
         innerText={store.timeInText}
         mainClass="MainCircle"
       />
-
-      {/* for test */}
-      <p>{store.timeInText}</p>
 
       <ActionBtns />
     </main>

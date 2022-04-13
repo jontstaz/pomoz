@@ -1,5 +1,5 @@
-export default ({ strokeWidth, percentage, mainClass, innerText }) => {
-  const radius = (50 - strokeWidth / 2);
+export default (props) => {
+  const radius = (50 - props.strokeWidth / 2);
 
   const pathDescription = `
       M 50,50 m 0,-${radius}
@@ -11,22 +11,23 @@ export default ({ strokeWidth, percentage, mainClass, innerText }) => {
 
   return (
     <svg
-      class={mainClass}
+      class={props.mainClass}
       viewBox="0 0 100 100"
     >
       <path
         d={pathDescription}
-        stroke-width={strokeWidth}
+        stroke-width={props.strokeWidth}
         fillOpacity={0}
       />
 
       <path
         d={pathDescription}
-        stroke-width={strokeWidth}
+        stroke-width={props.strokeWidth}
         fill-opacity={0}
         style={{
           "stroke-dasharray": `${diameter}px ${diameter}px`,
-          "stroke-dashoffset": `${((100 - percentage) / 100 * diameter)}px`,
+          "stroke-dashoffset":
+            `${((100 - props.percentage) / 100 * diameter)}px`,
         }}
       />
 
@@ -34,7 +35,7 @@ export default ({ strokeWidth, percentage, mainClass, innerText }) => {
         x={50}
         y={50}
       >
-        {innerText}
+        {props.innerText}
       </text>
     </svg>
   );
