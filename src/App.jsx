@@ -2,29 +2,26 @@ import "./css/style.css";
 import "./css/themes.css";
 import "./css/animations.css";
 
+import { Route, Routes } from "solid-app-router";
+import { lazy } from "solid-js";
+
 // components
 import Navbar from "./components/navbar";
-// import Timer from "./components/timer";
-import Settings from "./components/settings";
-// import TodoPage from "./components/todoPage.jsx";
 
-import { switchTheme } from "./utils";
-
-import { render } from "solid-js/web";
-// import { createSignal } from "solid-js";
+const Timer = lazy(() => import("./components/timer"));
+const Settings = lazy(() => import("./components/settings"));
 
 function App() {
   return (
     <>
       <Navbar />
-      <Settings />
+
+      <Routes>
+        <Route path="/" element={<Timer />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
     </>
   );
 }
 
-// set theme
-(localStorage.theme == "undefined" || !localStorage.theme)
-  ? switchTheme("light")
-  : switchTheme(localStorage.theme);
-
-render(() => <App />, document.getElementById("app"));
+export default App;

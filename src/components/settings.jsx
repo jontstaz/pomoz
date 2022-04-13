@@ -9,10 +9,6 @@ export default () => {
 
       <main className="settings">
         <div className="miscWidgets">
-          <p>this works?</p>
-
-          {/*  why dont these render?*/}
-
           <VolumeSlider />
           <GoalCounter />
         </div>

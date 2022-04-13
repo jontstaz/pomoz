@@ -85,6 +85,7 @@ h1 {
 
 .goalProgress path:nth-child(1) {
   stroke: var(--inactiveStroke);
+  fill: var(--volumebg);
 }
 
 .goalProgress path:nth-child(2) {
@@ -93,6 +94,8 @@ h1 {
 
 .goalProgress text {
   fill: var(--timerfg);
+  dominant-baseline: middle;
+  text-anchor: middle;
 }
 
 /* Adjust volume */

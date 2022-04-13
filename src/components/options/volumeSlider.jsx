@@ -25,7 +25,7 @@ function AudioSlider() {
 }
 
 export default () => {
-  (
+  return (
     <div id="volumeContainer">
       <h3>Adjust volume</h3>
       <AudioSlider />

@@ -1,6 +1,7 @@
 import { switchTheme } from "../utils";
-
 import { createSignal } from "solid-js";
+
+import { Link } from "solid-app-router";
 
 import { RiSystemSettingsLine, RiWeatherMoonClearLine } from "solid-icons/ri";
 import { BiNotepad } from "solid-icons/bi";
@@ -11,10 +12,12 @@ import "../css/navbar.css";
 
 function BrandInfo() {
   return (
-    <div class="brand">
-      <SiTarget size={21} class="brandLogo" />
-      <div class="brandTitle">Pomochad</div>
-    </div>
+    <Link href="/">
+      <div class="brand">
+        <SiTarget size={24} class="brandLogo" />
+        <div class="brandTitle">Pomochad</div>
+      </div>
+    </Link>
   );
 }
 
@@ -55,7 +58,9 @@ function NavbarLinks() {
           onclick={() => alert("WIP! data is stored in localstorage for now")}
         />
 
-        <RiSystemSettingsLine size={21} class="settingsBtn" />
+        <Link href="/settings">
+          <RiSystemSettingsLine size={21} class="settingsBtn" />
+        </Link>
       </div>
     </div>
   );

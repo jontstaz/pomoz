@@ -68,7 +68,7 @@ function CurrentProgress() {
 }
 
 export default () => {
-  (
+  return (
     <div className="goalWidgets">
       <ProjectedGoal hours={timer.goalHrs} />
       <CurrentProgress />
