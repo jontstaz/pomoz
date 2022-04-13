@@ -1,18 +1,17 @@
-import { AiOutlinePause } from "solid-icons/ai";
-import { VscDebugRestart,VscDebugStart } from 'solid-icons/vsc'
-
-import { createStore } from "solid-js/store";
-
 import "../css/timer.css";
+import RadialBar from "./radialBar";
+import { createMutable } from "solid-js/store";
 
-import { numToText, playSound, setProgressValue } from "../utils";
+import { AiOutlinePause } from "solid-icons/ai";
+import { VscDebugRestart, VscDebugStart } from "solid-icons/vsc";
+
+import { getProgressValue, numToText, playSound } from "../utils";
 
 import tickSound from "../../assets/audio/tick.mp3";
 import timerSound from "../../assets/audio/timerSound.mp3";
 
-import RadialBar from "./radialBar";
-
-const [store, setStore] = createStore(
+// save values here
+const store = createMutable(
   {
     timeInText: "25 : 00",
     progress: 0,
@@ -23,40 +22,42 @@ const [store, setStore] = createStore(
 
 const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
 
+// reset todaysProgress on next day
 if (!localStorage.date || localStorage.date != utc) {
   localStorage.setItem("date", utc);
   localStorage.setItem("todaysProgress", 0);
 }
 
+// update todaysProgress on current day
 if (localStorage.date == utc && localStorage.todaysProgress) {
-  setStore("todaysProgress", parseInt(localStorage.todaysProgress));
+  store.todaysProgress = parseInt(localStorage.todaysProgress);
 }
 
 export let interval, pausedTime, currentClick;
 export let totalTime = 25, pomoTime = totalTime * 60;
 
 function update() {
+  // when timer is finished
   if (pomoTime === 0) {
     playSound(timerSound);
+
+    store.timeInText = numToText(0, 0);
+    store.progress = 100;
+    store.playBtn = true;
+    store.todaysProgress = store.todaysProgress + totalTime;
+
     clearInterval(interval);
 
-    setStore("timeInText", numToText(0, 0));
-    setStore("progress", 100);
-    setStore("playBtn", true);
-
-    document.title = "Pomochad";
-
-    setStore("todaysProgress", +totalTime);
     localStorage.setItem("todaysProgress", store.todaysProgress);
   }
 
   const min = Math.floor(pomoTime / 60);
   const sec = pomoTime % 60;
 
-  setStore("timeInText", numToText(min, sec));
+  store.timeInText = numToText(min, sec);
+  store.progress = getProgressValue(totalTime, pomoTime);
 
   document.title = numToText(min, sec);
-  setStore("progress", setProgressValue(totalTime, pomoTime));
   pomoTime--;
 }
 
@@ -64,14 +65,16 @@ function run(action) {
   currentClick = action;
   interval = setInterval(update, 1000);
 
-  if (action == "start" || action == "resume") setStore("playBtn", false);
+  if (action == "start" || action == "resume") {
+    store.playBtn = false;
+  }
+
   action == "start" ? playSound(tickSound) : (pomoTime = pausedTime);
 }
 
 function start() {
   switch (currentClick) {
     // start
-
     case undefined:
     case "reset":
       run("start");
@@ -88,38 +91,43 @@ function pause() {
   currentClick = "pause";
   pausedTime = pomoTime;
 
-  setStore("progress", setProgressValue(totalTime, pausedTime));
+  store.playBtn = true;
+  store.progress = getProgressValue(totalTime, pausedTime);
 
   const min = Math.floor(pausedTime / 60);
   const sec = pausedTime % 60;
 
-  setStore("timeInText", numToText(min, sec));
+  store.timeInText = numToText(min, sec);
 
   pomoTime = 0;
   clearInterval(interval);
-  setStore("playBtn", true);
 }
 
 function reset() {
-  document.title = "Pomochad";
-
   clearInterval(interval);
+
+  document.title = "Pomochad";
   currentClick = "reset";
-
-  setStore("progress", 0);
-  setStore("timeInText", `${totalTime} : 00`);
-
   pomoTime = totalTime * 60;
-  setStore("playBtn", true);
+
+  store.progress = 0;
+  store.playBtn = true;
 }
 
-function SessionBtns() {
+function ActionBtns() {
   return (
-    <div class="sessionBtns">
+    <div class="ActionBtns">
+      {/* show play btn by default */}
+
       {store.playBtn &&
         <VscDebugStart onClick={start} class="playBtn" size={24} />}
+
+      {/* hide playBtn and show pause btn in pauseMode*/}
+
       {!store.playBtn &&
         <AiOutlinePause onClick={pause} class="playBtn" size={24} />}
+
+      {/*Reset btn*/}
 
       <VscDebugRestart
         onClick={reset}
@@ -130,7 +138,6 @@ function SessionBtns() {
   );
 }
 
-// Timer
 export default function Timer() {
   return (
     <main class="timer">
@@ -140,7 +147,7 @@ export default function Timer() {
         innerText={store.timeInText}
         mainClass="MainCircle"
       />
-      <SessionBtns />
+      <ActionBtns />
     </main>
   );
 }
