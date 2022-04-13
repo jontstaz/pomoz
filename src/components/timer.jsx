@@ -1,6 +1,5 @@
 import "../css/timer.css";
 import RadialBar from "./radialBar";
-import { createMutable } from "solid-js/store";
 
 import { AiOutlinePause } from "solid-icons/ai";
 import { VscDebugRestart, VscDebugStart } from "solid-icons/vsc";
@@ -10,17 +9,8 @@ import { getProgressValue, numToText, playSound } from "../utils";
 import tickSound from "../../assets/audio/tick.mp3";
 import timerSound from "../../assets/audio/timerSound.mp3";
 
-// save values here
-const store = createMutable(
-  {
-    timeInText: "25 : 00",
-    progress: 0,
-    playBtn: true,
-    todaysProgress: 0,
-  },
-);
-
 const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
+import { timer } from "../store";
 
 // reset todaysProgress on next day
 if (!localStorage.date || localStorage.date != utc) {
@@ -30,7 +20,7 @@ if (!localStorage.date || localStorage.date != utc) {
 
 // update todaysProgress on current day
 if (localStorage.date == utc && localStorage.todaysProgress) {
-  store.todaysProgress = parseInt(localStorage.todaysProgress);
+  timer.todaysProgress = parseInt(localStorage.todaysProgress);
 }
 
 export let interval, pausedTime, currentClick;
@@ -41,14 +31,14 @@ function update() {
   if (pomoTime === 0) {
     playSound(timerSound);
 
-    store.timeInText = numToText(0, 0);
-    store.progress = 100;
-    store.playBtn = true;
-    store.todaysProgress = store.todaysProgress + totalTime;
+    timer.timeInText = numToText(0, 0);
+    timer.progress = 100;
+    timer.playBtn = true;
+    timer.todaysProgress = timer.todaysProgress + totalTime;
 
     clearInterval(interval);
 
-    localStorage.setItem("todaysProgress", store.todaysProgress);
+    localStorage.setItem("todaysProgress", timer.todaysProgress);
 
     document.title = "Time's up!";
     return;
@@ -57,8 +47,8 @@ function update() {
   const min = Math.floor(pomoTime / 60);
   const sec = pomoTime % 60;
 
-  store.timeInText = numToText(min, sec);
-  store.progress = getProgressValue(totalTime, pomoTime);
+  timer.timeInText = numToText(min, sec);
+  timer.progress = getProgressValue(totalTime, pomoTime);
 
   document.title = numToText(min, sec);
   pomoTime--;
@@ -69,7 +59,7 @@ function run(action) {
   interval = setInterval(update, 0);
 
   if (action == "start" || action == "resume") {
-    store.playBtn = false;
+    timer.playBtn = false;
   }
 
   action == "start" ? playSound(tickSound) : (pomoTime = pausedTime);
@@ -94,13 +84,13 @@ function pause() {
   currentClick = "pause";
   pausedTime = pomoTime;
 
-  store.playBtn = true;
-  store.progress = getProgressValue(totalTime, pausedTime);
+  timer.playBtn = true;
+  timer.progress = getProgressValue(totalTime, pausedTime);
 
   const min = Math.floor(pausedTime / 60);
   const sec = pausedTime % 60;
 
-  store.timeInText = numToText(min, sec);
+  timer.timeInText = numToText(min, sec);
 
   pomoTime = 0;
   clearInterval(interval);
@@ -113,9 +103,9 @@ function reset() {
   currentClick = "reset";
   pomoTime = totalTime * 60;
 
-  store.progress = 0;
-  store.playBtn = true;
-  store.timeInText = `${totalTime} : 00`;
+  timer.progress = 0;
+  timer.playBtn = true;
+  timer.timeInText = `${totalTime} : 00`;
 }
 
 function ActionBtns() {
@@ -123,12 +113,12 @@ function ActionBtns() {
     <div class="ActionBtns">
       {/* show play btn by default */}
 
-      {store.playBtn &&
+      {timer.playBtn &&
         <VscDebugStart onClick={start} class="playBtn" size={24} />}
 
       {/* hide playBtn and show pause btn in pauseMode*/}
 
-      {!store.playBtn &&
+      {!timer.playBtn &&
         <AiOutlinePause onClick={pause} class="playBtn" size={24} />}
 
       {/*Reset btn*/}
@@ -147,8 +137,8 @@ export default () => {
     <main class="timer">
       <RadialBar
         strokeWidth={6}
-        percentage={store.progress}
-        innerText={store.timeInText}
+        percentage={timer.progress}
+        innerText={timer.timeInText}
         mainClass="MainCircle"
       />
 

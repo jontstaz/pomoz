@@ -1,5 +1,5 @@
-// import { store } from "@risingstack/react-easy-state";
-//
+import { createMutable } from "solid-js/store";
+
 // // projects on sidebar
 // const projects = store({
 //   clickedProject: "Today",
@@ -20,15 +20,23 @@
 // if (localStorage.todos) {
 //   todos.list = JSON.parse(localStorage.todos);
 // }
-//
-// // user volume
-//
-// const volume = store({
-//   value: 90,
-// });
-//
+
 // if (localStorage.volume) {
 //   volume.value = localStorage.volume;
 // }
 //
-// export { projects, todos, volume };
+// export { projects, todos, volume }
+
+// save values here
+const timer = createMutable(
+  {
+    timeInText: "25 : 00",
+    progress: 0,
+    playBtn: true,
+    todaysProgress: 0,
+    goalHrs: 5,
+    volume: 90,
+  },
+);
+
+export { timer };
