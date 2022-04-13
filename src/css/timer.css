@@ -19,6 +19,7 @@
 
 .MainCircle path:nth-child(1) {
   stroke: var(--inactiveStroke);
+  fill: var(--bg-alt);
 }
 
 .MainCircle path:nth-child(2) {
@@ -29,11 +30,13 @@
   fill: var(--timerfg);
   font-family: "Quicksand", sans-serif;
   font-size: 1.2rem;
+  dominant-baseline: middle;
+  text-anchor: middle;
 }
 
 /* SESSION BTNS like play , reset */
 
-.sessionBtns {
+.ActionBtns {
   position: absolute;
   top: 83%;
   left: 50%;

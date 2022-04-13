@@ -2,43 +2,26 @@ import "./css/style.css";
 import "./css/themes.css";
 import "./css/animations.css";
 
+import { Route, Routes } from "solid-app-router";
+
 // components
 import Navbar from "./components/navbar";
 import Timer from "./components/timer";
 import Settings from "./components/settings";
-import TodoPage from "./components/todoPage.jsx";
-
-import { switchTheme } from "./utils";
-
-import React from 'react';
-import ReactDOMClient from 'react-dom/client';
-
-import { Route } from "wouter";
+import TodoPage from "./components/todoPage";
 
 function App() {
   return (
     <>
       <Navbar />
 
-      <Route path="/">
-        <Timer />
-      </Route>
-
-      <Route path="/todos">
-        <TodoPage />
-      </Route>
-
-      <Route path="/settings">
-        <Settings />
-      </Route>
+      <Routes>
+        <Route path="/" element={<Timer />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/todos" element={<TodoPage />} />
+      </Routes>
     </>
   );
 }
 
-// set theme
-(localStorage.theme == "undefined" || !localStorage.theme)
-  ? switchTheme("light")
-  : switchTheme(localStorage.theme);
-
-const root = ReactDOMClient.createRoot(document.getElementById("app"));
-root.render(<App />);
+export default App;

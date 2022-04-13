@@ -1,4 +1,4 @@
-import { Trash } from "phosphor-react";
+import { RiSystemDeleteBinFill } from 'solid-icons/ri'
 import { projects } from "../../store";
 import { removeProjectTodos } from "./project";
 
@@ -8,7 +8,7 @@ const RemoveAllTodos = () => {
       className="removeTodosBtn"
       onClick={() => removeProjectTodos(projects.clickedProject)}
     >
-      <Trash size={21} weight="fill" />Todos
+      <RiSystemDeleteBinFill size={21} weight="fill" />Todos
     </button>
   );
 };

@@ -1,29 +1,24 @@
-import { store, view } from "@risingstack/react-easy-state";
-import { ArrowClockwise, Pause, Play } from "phosphor-react";
-
 import "../css/timer.css";
+import RadialBar from "./radialBar";
 
-import { numToText, playSound, setProgressValue } from "../utils";
+import { AiOutlinePause } from "solid-icons/ai";
+import { VscDebugRestart, VscDebugStart } from "solid-icons/vsc";
+
+import { getProgressValue, numToText, playSound } from "../utils";
 
 import tickSound from "../../assets/audio/tick.mp3";
 import timerSound from "../../assets/audio/timerSound.mp3";
 
-import RadialBar from "./radialBar";
-
-export const timer = store({
-  timeInText: "25 : 00",
-  progress: 0,
-  playBtn: true,
-  todaysProgress: 0,
-});
-
 const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
+import { timer } from "../store";
 
+// reset todaysProgress on next day
 if (!localStorage.date || localStorage.date != utc) {
   localStorage.setItem("date", utc);
   localStorage.setItem("todaysProgress", 0);
 }
 
+// update todaysProgress on current day
 if (localStorage.date == utc && localStorage.todaysProgress) {
   timer.todaysProgress = parseInt(localStorage.todaysProgress);
 }
@@ -32,26 +27,30 @@ export let interval, pausedTime, currentClick;
 export let totalTime = 25, pomoTime = totalTime * 60;
 
 function update() {
+  // when timer is finished
   if (pomoTime === 0) {
     playSound(timerSound);
-    clearInterval(interval);
 
     timer.timeInText = numToText(0, 0);
     timer.progress = 100;
     timer.playBtn = true;
+    timer.todaysProgress = timer.todaysProgress + totalTime;
 
-    document.title = "Pomochad";
+    clearInterval(interval);
 
-    timer.todaysProgress += totalTime;
     localStorage.setItem("todaysProgress", timer.todaysProgress);
+
+    document.title = "Time's up!";
+    return;
   }
 
   const min = Math.floor(pomoTime / 60);
   const sec = pomoTime % 60;
 
   timer.timeInText = numToText(min, sec);
+  timer.progress = getProgressValue(totalTime, pomoTime);
+
   document.title = numToText(min, sec);
-  timer.progress = setProgressValue(totalTime, pomoTime);
   pomoTime--;
 }
 
@@ -59,14 +58,16 @@ function run(action) {
   currentClick = action;
   interval = setInterval(update, 1000);
 
-  if (action == "start" || action == "resume") timer.playBtn = false;
+  if (action == "start" || action == "resume") {
+    timer.playBtn = false;
+  }
+
   action == "start" ? playSound(tickSound) : (pomoTime = pausedTime);
 }
 
 function start() {
   switch (currentClick) {
     // start
-
     case undefined:
     case "reset":
       run("start");
@@ -83,7 +84,8 @@ function pause() {
   currentClick = "pause";
   pausedTime = pomoTime;
 
-  timer.progress = setProgressValue(totalTime, pausedTime);
+  timer.playBtn = true;
+  timer.progress = getProgressValue(totalTime, pausedTime);
 
   const min = Math.floor(pausedTime / 60);
   const sec = pausedTime % 60;
@@ -92,49 +94,55 @@ function pause() {
 
   pomoTime = 0;
   clearInterval(interval);
-  timer.playBtn = true;
 }
 
 function reset() {
-  document.title = "Pomochad";
-
   clearInterval(interval);
+
+  document.title = "Pomochad";
   currentClick = "reset";
+  pomoTime = totalTime * 60;
 
   timer.progress = 0;
-  timer.timeInText = `${totalTime} : 00`;
-
-  pomoTime = totalTime * 60;
   timer.playBtn = true;
+  timer.timeInText = `${totalTime} : 00`;
 }
 
-function SessionBtns() {
+function ActionBtns() {
   return (
-    <div className="sessionBtns">
-      {timer.playBtn &&
-        <Play onClick={start} className="playBtn" size={24} />}
-      {!timer.playBtn &&
-        <Pause onClick={pause} className="playBtn" size={24} />}
+    <div class="ActionBtns">
+      {/* show play btn by default */}
 
-      <ArrowClockwise
+      {timer.playBtn &&
+        <VscDebugStart onClick={start} class="playBtn" size={24} />}
+
+      {/* hide playBtn and show pause btn in pauseMode*/}
+
+      {!timer.playBtn &&
+        <AiOutlinePause onClick={pause} class="playBtn" size={24} />}
+
+      {/*Reset btn*/}
+
+      <VscDebugRestart
         onClick={reset}
-        className="resetBtn"
+        class="resetBtn"
         size={24}
       />
     </div>
   );
 }
 
-// Timer
+export default () => {
+  return (
+    <main class="timer">
+      <RadialBar
+        strokeWidth={6}
+        percentage={timer.progress}
+        innerText={timer.timeInText}
+        mainClass="MainCircle"
+      />
 
-export default view(() => (
-  <main className="timer">
-    <RadialBar
-      strokeWidth={6}
-      percentage={timer.progress}
-      innerText={timer.timeInText}
-      mainClass="MainCircle"
-    />
-    <SessionBtns />
-  </main>
-));
+      <ActionBtns />
+    </main>
+  );
+};

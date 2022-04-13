@@ -1,27 +1,34 @@
 import "../../css/settings.css";
-import { view } from "@risingstack/react-easy-state";
-import { volume } from "../../store";
+import { timer } from "../../store";
 
 function handleRange(e) {
-  volume.value = e.target.value;
-  localStorage.setItem("volume", volume.value);
+  timer.volume = e.target.value;
+  localStorage.setItem("volume", timer.volume);
 }
 
-export default view(() => (
-  <div id="volumeContainer">
-    <h3>Adjust volume</h3>
+function AudioSlider() {
+  return (
     <div id="sliderContainer">
       <input
         type="range"
         min="0"
         max="100"
         id="slider"
-        value={volume.value}
+        value={timer.volume}
         onInput={handleRange}
       />
       <div className="volumePercentage">
-        {volume.value}
+        {timer.volume}
       </div>
     </div>
-  </div>
-));
+  );
+}
+
+export default () => {
+  return (
+    <div id="volumeContainer">
+      <h3>Adjust volume</h3>
+      <AudioSlider />
+    </div>
+  );
+};

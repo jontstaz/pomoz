@@ -1,28 +1,32 @@
-import { useState } from "react";
-import { Link } from "wouter";
 import { switchTheme } from "../utils";
+import { createSignal } from "solid-js";
 
-import { Ghost, MoonStars, Nut, Target, User } from "phosphor-react";
+import { Link } from "solid-app-router";
+
+import { RiSystemSettingsLine, RiWeatherMoonClearLine } from "solid-icons/ri";
+import { BiNotepad } from "solid-icons/bi";
+import { SiTarget } from "solid-icons/si";
+import { AiOutlineUser } from "solid-icons/ai";
 
 import "../css/navbar.css";
 
 function BrandInfo() {
   return (
-    <div className="brand">
-      <Target className="brandLogo" size={30} weight="fill" />
-      <Link href="/">
-        <div className="brandTitle">Pomochad</div>
-      </Link>
-    </div>
+    <Link href="/">
+      <div class="brand">
+        <SiTarget size={24} class="brandLogo" />
+        <div class="brandTitle">Pomochad</div>
+      </div>
+    </Link>
   );
 }
 
 function NavbarLinks() {
   let default_Theme = document.querySelector("body").dataset.theme;
-  let [theme, setTheme] = useState(default_Theme);
+  const [theme, setTheme] = createSignal(default_Theme);
 
   function addTheme() {
-    switch (theme) {
+    switch (theme()) {
       case "light":
         setTheme("dark");
         switchTheme("dark");
@@ -35,42 +39,42 @@ function NavbarLinks() {
   }
 
   return (
-    <div className="navBtns">
-      <MoonStars
-        className="themeToggle"
-        size={26}
-        onClick={() => addTheme()}
+    <div class="navBtns">
+      <RiWeatherMoonClearLine
+        size={21}
+        class="themeToggle"
+        onclick={() => addTheme()}
       />
 
-      <div className="navbarLinks">
+      <div class="navbarLinks">
         <Link href="/todos">
-          <div className="todosBtn">
-            <Ghost className="todosIcon" size={23} />
+          <div class="todosBtn">
+            <BiNotepad size={21} class="todosIcon" />
             Todos
           </div>
         </Link>
 
-        <User
-          className="userIcon"
-          size={23}
-          onClick={() => alert("WIP! data stored in localstorage for now")}
+        <AiOutlineUser
+          size={21}
+          class="userIcon"
+          onclick={() => alert("WIP! data is stored in localstorage for now")}
         />
 
         <Link href="/settings">
-          <Nut className="settingsBtn" size={25} />
+          <RiSystemSettingsLine size={21} class="settingsBtn" />
         </Link>
       </div>
     </div>
   );
 }
 
-function Navbar() {
+// Navbar
+
+export default () => {
   return (
-    <nav className="navbar">
+    <nav class="navbar">
       <BrandInfo />
       <NavbarLinks />
     </nav>
   );
-}
-
-export default Navbar;
+};

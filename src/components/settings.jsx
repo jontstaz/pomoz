@@ -1,7 +1,8 @@
 import VolumeSlider from "./options/volumeSlider";
-import GoalCounter from "./widgets/goals";
+import GoalCounter from "./options/goals";
 
-function Settings() {
+// settings component
+export default () => {
   return (
     <>
       <h1>Settings</h1>
@@ -14,6 +15,4 @@ function Settings() {
       </main>
     </>
   );
-}
-
-export default Settings;
+};

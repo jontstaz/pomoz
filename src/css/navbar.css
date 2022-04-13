@@ -84,7 +84,7 @@
   padding-right: 0.3rem;
 }
 
-.navbarLinks > *:hover {
+.navbarLinks a > *:hover {
   background-color: var(--themeToggleFg);
   color: var(--themeToggleBg);
 }

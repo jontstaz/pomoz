@@ -1,4 +1,4 @@
-import { volume } from "./store";
+import { timer } from "./store.jsx";
 
 function numToText(min, sec) {
   if (min < 10) min = `0${min}`;
@@ -6,7 +6,7 @@ function numToText(min, sec) {
   return `${min} : ${sec}`;
 }
 
-function setProgressValue(ogTime, newTime) {
+function getProgressValue(ogTime, newTime) {
   newTime = newTime / 60;
   const timeProgres = ((ogTime - newTime) / ogTime) * 100;
   return timeProgres;
@@ -14,8 +14,9 @@ function setProgressValue(ogTime, newTime) {
 
 function playSound(path) {
   let n = document.querySelector("audio");
+
   n.setAttribute("src", path);
-  n.volume = volume.value / 100;
+  n.volume = timer.volume / 100;
   n.play();
 }
 
@@ -24,4 +25,9 @@ function switchTheme(name) {
   localStorage.setItem("theme", name);
 }
 
-export { numToText, playSound, setProgressValue, switchTheme };
+function minToHrs(num, fixed) {
+  let re = new RegExp("^-?\\d+(?:\.\\d{0," + (fixed || -1) + "})?");
+  return num.toString().match(re)[0];
+}
+
+export { getProgressValue, minToHrs, numToText, playSound, switchTheme };
