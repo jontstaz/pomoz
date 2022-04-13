@@ -1,4 +1,4 @@
-Minimal pomodoro timer made using preact and vite (WIP)
+Minimal pomodoro timer made using solidjs and vite (WIP)
 
 # Run locally 
 
