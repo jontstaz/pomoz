@@ -138,7 +138,7 @@ function ActionBtns() {
   );
 }
 
-export default function Timer() {
+export default () => {
   return (
     <main class="timer">
       <RadialBar
@@ -147,7 +147,11 @@ export default function Timer() {
         innerText={store.timeInText}
         mainClass="MainCircle"
       />
+
+      {/* for test */}
+      <p>{store.timeInText}</p>
+
       <ActionBtns />
     </main>
   );
-}
+};
