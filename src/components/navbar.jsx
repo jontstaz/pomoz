@@ -1,28 +1,29 @@
-import { useState } from "react";
-import { Link } from "wouter";
 import { switchTheme } from "../utils";
 
-import { Ghost, MoonStars, Nut, Target, User } from "phosphor-react";
+import { createSignal } from "solid-js";
+
+import { RiSystemSettingsLine, RiWeatherMoonClearLine } from "solid-icons/ri";
+import { BiNotepad } from "solid-icons/bi";
+import { SiTarget } from "solid-icons/si";
+import { AiOutlineUser } from "solid-icons/ai";
 
 import "../css/navbar.css";
 
 function BrandInfo() {
   return (
-    <div className="brand">
-      <Target className="brandLogo" size={30} weight="fill" />
-      <Link href="/">
-        <div className="brandTitle">Pomochad</div>
-      </Link>
+    <div class="brand">
+      <SiTarget size={25} class="brandLogo" />
+      <div class="brandTitle">Pomochad</div>
     </div>
   );
 }
 
 function NavbarLinks() {
   let default_Theme = document.querySelector("body").dataset.theme;
-  let [theme, setTheme] = useState(default_Theme);
+  const [theme, setTheme] = createSignal(default_Theme);
 
   function addTheme() {
-    switch (theme) {
+    switch (theme()) {
       case "light":
         setTheme("dark");
         switchTheme("dark");
@@ -35,30 +36,26 @@ function NavbarLinks() {
   }
 
   return (
-    <div className="navBtns">
-      <MoonStars
-        className="themeToggle"
+    <div class="navBtns">
+      <RiWeatherMoonClearLine
         size={26}
-        onClick={() => addTheme()}
+        class="themeToggle"
+        onclick={() => addTheme()}
       />
 
-      <div className="navbarLinks">
-        <Link href="/todos">
-          <div className="todosBtn">
-            <Ghost className="todosIcon" size={23} />
-            Todos
-          </div>
-        </Link>
+      <div class="navbarLinks">
+        <div class="todosBtn">
+          <BiNotepad size={23} class="todosIcon" />
+          Todos
+        </div>
 
-        <User
-          className="userIcon"
+        <AiOutlineUser
           size={23}
-          onClick={() => alert("WIP! data stored in localstorage for now")}
+          class="userIcon"
+          onclick={() => alert("WIP! data is stored in localstorage for now")}
         />
 
-        <Link href="/settings">
-          <Nut className="settingsBtn" size={25} />
-        </Link>
+        <RiSystemSettingsLine size={25} class="settingsBtn" />
       </div>
     </div>
   );
@@ -66,7 +63,7 @@ function NavbarLinks() {
 
 function Navbar() {
   return (
-    <nav className="navbar">
+    <nav class="navbar">
       <BrandInfo />
       <NavbarLinks />
     </nav>
