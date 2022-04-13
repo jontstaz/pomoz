@@ -9,11 +9,15 @@ import { minToHrs } from "../../utils";
 
 if (localStorage.targetGoal) timer.goalHrs = localStorage.targetGoal;
 
-let currentGoal = parseFloat(timer.todaysProgress / 60);
+function getCurrentGoal() {
+  return (
+    parseFloat(timer.todaysProgress / 60)
+  );
+}
 
 function getCurrentProgress() {
   let progress = parseFloat(
-    currentGoal / timer.goalHrs,
+    getCurrentGoal() / timer.goalHrs,
   );
 
   return Math.floor(progress * 100);
@@ -60,7 +64,7 @@ function CurrentProgress() {
   return (
     <RadialBar
       percentage={getCurrentProgress()}
-      innerText={`${minToHrs(currentGoal, 2)} hrs`}
+      innerText={`${minToHrs(getCurrentGoal(), 2)} hrs`}
       strokeWidth={6}
       mainClass="goalProgress"
     />

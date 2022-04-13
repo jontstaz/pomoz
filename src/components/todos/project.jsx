@@ -1,7 +1,6 @@
 // basically project name on the sidebar
 
-import { XCircle } from "phosphor-react";
-import { view } from "@risingstack/react-easy-state";
+import { IoCloseCircle } from "solid-icons/io";
 import { projects, todos } from "../../store";
 
 function getColor(x) {
@@ -28,34 +27,36 @@ const removeProject = (item) => {
   removeProjectTodos(item);
 };
 
-export default view((props) => (
-  <div
-    className={projects.clickedProject == props.name
-      ? "todoProject todoProjectClicked"
-      : "todoProject"}
-    onClick={() => projects.clickedProject = props.name}
-  >
-    <div className="projectName">
-      <props.icon
-        size={20}
-        style={{ color: getColor(props.color) }}
-      />
-      {props.name}
-    </div>
-
-    {/*show delete icon on user added todos only!*/}
-
-    {(projects.clickedProject == props.name && props.name != "Today" &&
-      props.name != "Important" && props.name != "Low priority") &&
-      (
-        <XCircle
+export default (props) => {
+  return (
+    <div
+      className={projects.clickedProject == props.name
+        ? "todoProject todoProjectClicked"
+        : "todoProject"}
+      onClick={() => projects.clickedProject = props.name}
+    >
+      <div className="projectName">
+        <props.icon
           size={20}
-          weight="fill"
-          style={{ color: "var(--red)" }}
-          onClick={() => removeProject(props.name)}
+          style={{ color: getColor(props.color) }}
         />
-      )}
-  </div>
-));
+        {props.name}
+      </div>
+
+      {/*show delete icon on user added todos only!*/}
+
+      {(projects.clickedProject == props.name && props.name != "Today" &&
+        props.name != "Important" && props.name != "Low priority") &&
+        (
+          <IoCloseCircle
+            size={20}
+            weight="fill"
+            style={{ color: "var(--red)" }}
+            onClick={() => removeProject(props.name)}
+          />
+        )}
+    </div>
+  );
+};
 
 export { removeProjectTodos };

@@ -29,7 +29,7 @@
 .MainCircle text {
   fill: var(--timerfg);
   font-family: "Quicksand", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   dominant-baseline: middle;
   text-anchor: middle;
 }

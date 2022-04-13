@@ -47,10 +47,12 @@ function NavbarLinks() {
       />
 
       <div class="navbarLinks">
-        <div class="todosBtn">
-          <BiNotepad size={21} class="todosIcon" />
-          Todos
-        </div>
+        <Link href="/todos">
+          <div class="todosBtn">
+            <BiNotepad size={21} class="todosIcon" />
+            Todos
+          </div>
+        </Link>
 
         <AiOutlineUser
           size={21}
@@ -66,13 +68,13 @@ function NavbarLinks() {
   );
 }
 
-function Navbar() {
+// Navbar
+
+export default () => {
   return (
     <nav class="navbar">
       <BrandInfo />
       <NavbarLinks />
     </nav>
   );
-}
-
-export default Navbar;
+};

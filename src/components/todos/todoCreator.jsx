@@ -1,8 +1,8 @@
-import { store, view } from "@risingstack/react-easy-state";
-import { PlusCircle, XCircle } from "phosphor-react";
+import { IoAddCircle, IoCloseCircle } from "solid-icons/io";
 import { projects, todos } from "../../store";
+import { createMutable } from "solid-js/store";
 
-const inputbox = store({
+const inputbox = createMutable({
   show: false,
   priority: "low",
 });
@@ -13,7 +13,7 @@ function NewTodoBtn() {
       className="newTodoBtn"
       onClick={() => inputbox.show = true}
     >
-      <PlusCircle size={21} weight="fill" /> Todo
+      <IoAddCircle size={21} weight="fill" /> Todo
     </button>
   );
 }
@@ -53,7 +53,7 @@ function TodoInput() {
 
   return (
     <form action="" method="get" className="todoInput">
-      <XCircle
+      <IoCloseCircle
         size={20}
         weight="fill"
         className="closeTodoInput"
@@ -68,7 +68,7 @@ function TodoInput() {
         onChange={(e) => todo.name = e.target.value}
       />
 
-      <label for="todo-note"  style={{ display: "none" }}></label>
+      <label for="todo-note" style={{ display: "none" }}></label>
       <textarea
         id="todo-note"
         name="todo-note"
@@ -99,10 +99,12 @@ function TodoInput() {
   );
 }
 
-export default view(() => (
-  <div className="todoCreator">
-    {inputbox.show &&
-      <TodoInput />}
-    <NewTodoBtn />
-  </div>
-));
+export default () => {
+  return (
+    <div className="todoCreator">
+      {inputbox.show &&
+        <TodoInput />}
+      <NewTodoBtn />
+    </div>
+  );
+};

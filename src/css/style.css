@@ -12,11 +12,7 @@ body {
 
 a {
   text-decoration: none;
-  color: inherit;
-}
-
-a:hover {
-  background-color: none;
+  color: var(--fg);
 }
 
 /* ===== Scrollbar ==== */
