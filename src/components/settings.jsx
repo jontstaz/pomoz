@@ -7,8 +7,8 @@ export default () => {
     <>
       <h1>Settings</h1>
 
-      <main className="settings">
-        <div className="miscWidgets">
+      <main class="settings">
+        <div class="miscWidgets">
           <VolumeSlider />
           <GoalCounter />
         </div>

@@ -5,10 +5,10 @@ import { projects } from "../../store";
 
 export default () => {
   return (
-    <main className="todoSection">
+    <main class="todoSection">
       <TodoList />
 
-      <div className="todoFooter">
+      <div class="todoFooter">
         {(projects.clickedProject != "Important" &&
           projects.clickedProject != "Low priority") &&
           (

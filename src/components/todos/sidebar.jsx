@@ -25,7 +25,7 @@ function ProjectInput() {
   }
 
   return (
-    <form action="" method="get" className="projectInput">
+    <form action="" method="get" class="projectInput">
       <input
         type="text"
         placeholder="project name"
@@ -33,13 +33,13 @@ function ProjectInput() {
         onChange={(e) => tmpProject = e.target.value}
       />
 
-      <div className="projectInputBtns">
+      <div class="projectInputBtns">
         <button onClick={() => addProject()}>
           save
         </button>
 
         <IoCloseCircle
-          className="closeProjectInput"
+          class="closeProjectInput"
           size={20}
           weight="fill"
           onClick={() => showInput(false)}
@@ -51,8 +51,8 @@ function ProjectInput() {
 
 export default () => {
   return (
-    <div className="sidebar">
-      <div className="projects">
+    <div class="sidebar">
+      <div class="projects">
         <ProjectLists />
       </div>
 
@@ -60,7 +60,7 @@ export default () => {
         {projects.showInputBox &&
           <ProjectInput closeInput={() => showInput(false)} />}
 
-        <button className="newProjectBtn" onClick={() => showInput(true)}>
+        <button class="newProjectBtn" onClick={() => showInput(true)}>
           <IoAddCircle size={21} weight="fill" /> Add Project
         </button>
       </div>

@@ -5,7 +5,7 @@ import { removeProjectTodos } from "./project";
 const RemoveAllTodos = () => {
   return (
     <button
-      className="removeTodosBtn"
+      class="removeTodosBtn"
       onClick={() => removeProjectTodos(projects.clickedProject)}
     >
       <RiSystemDeleteBinFill size={21} weight="fill" />Todos

@@ -10,7 +10,7 @@ const inputbox = createMutable({
 function NewTodoBtn() {
   return (
     <button
-      className="newTodoBtn"
+      class="newTodoBtn"
       onClick={() => inputbox.show = true}
     >
       <IoAddCircle size={21} weight="fill" /> Todo
@@ -52,11 +52,11 @@ function TodoInput() {
   }
 
   return (
-    <form action="" method="get" className="todoInput">
+    <form action="" method="get" class="todoInput">
       <IoCloseCircle
         size={20}
         weight="fill"
-        className="closeTodoInput"
+        class="closeTodoInput"
         onClick={() => inputbox.show = false}
       />
 
@@ -78,7 +78,7 @@ function TodoInput() {
       </textarea>
 
       <div style={{ display: "flex", gap: ".5rem" }}>
-        <div className="todoPriority">
+        <div class="todoPriority">
           <label for="priority">priority</label>
 
           <select
@@ -91,7 +91,7 @@ function TodoInput() {
           </select>
         </div>
 
-        <button className="newProjectBtn" onClick={() => saveTodo(todo)}>
+        <button class="newProjectBtn" onClick={() => saveTodo(todo)}>
           save
         </button>
       </div>
@@ -101,7 +101,7 @@ function TodoInput() {
 
 export default () => {
   return (
-    <div className="todoCreator">
+    <div class="todoCreator">
       {inputbox.show &&
         <TodoInput />}
       <NewTodoBtn />

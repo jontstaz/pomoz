@@ -10,7 +10,7 @@ import Project from "./project";
 // list of all project btns on the sidebar
 export default () => {
   return (
-    <div className="projectLists">
+    <div class="projectLists">
       <Project name="Today" icon={IoTodaySharp} color="blue" />
       <Project name="Important" icon={HiSolidFire} color="red" />
       <Project name="Low priority" icon={HiSolidFire} color="green" />

@@ -31,14 +31,14 @@ function ChangeHrsBtns() {
   }
 
   return (
-    <div className="adjustGoal">
+    <div class="adjustGoal">
       <BiSolidChevronUpCircle
-        className="changeHrsBtn"
+        class="changeHrsBtn"
         weight="fill"
         onClick={() => alterValues("add")}
       />
       <BiSolidChevronDownCircle
-        className="changeHrsBtn"
+        class="changeHrsBtn"
         weight="fill"
         onClick={() => alterValues("min")}
       />
@@ -48,11 +48,11 @@ function ChangeHrsBtns() {
 
 function ProjectedGoal(props) {
   return (
-    <div className="projectedGoal">
+    <div class="projectedGoal">
       <h3>Target Goal</h3>
 
-      <div className="projectedGoalContent">
-        <div className="projectedGoalText">{props.hours} hrs</div>
+      <div class="projectedGoalContent">
+        <div class="projectedGoalText">{props.hours} hrs</div>
         <ChangeHrsBtns />
       </div>
     </div>
@@ -73,7 +73,7 @@ function CurrentProgress() {
 
 export default () => {
   return (
-    <div className="goalWidgets">
+    <div class="goalWidgets">
       <ProjectedGoal hours={timer.goalHrs} />
       <CurrentProgress />
     </div>

@@ -17,7 +17,7 @@ function AudioSlider() {
         value={timer.volume}
         onInput={handleRange}
       />
-      <div className="volumePercentage">
+      <div class="volumePercentage">
         {timer.volume}
       </div>
     </div>

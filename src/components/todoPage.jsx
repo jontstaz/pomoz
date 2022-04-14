@@ -4,7 +4,7 @@ import "../css/todos/todos.css";
 
 export default function () {
   return (
-    <div className="todosPage">
+    <div class="todosPage">
       <Sidebar />
       <TodoSection />
     </div>

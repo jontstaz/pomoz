@@ -28,16 +28,16 @@ const removeTodo = (name) => {
 
 export default (props) => {
   return (
-    <div className="todo">
+    <div class="todo">
       <div
-        className={FinishedStatus(props.name, "get")
+        class={FinishedStatus(props.name, "get")
           ? "todoTitle checkedTodo"
           : "todoTitle"}
       >
         {props.name}
       </div>
       <div
-        className={FinishedStatus(props.name, "get") ? "todoNote checkedTodo"
+        class={FinishedStatus(props.name, "get") ? "todoNote checkedTodo"
         : "todoNote"}
       >
         {props.note}
@@ -51,7 +51,7 @@ export default (props) => {
                 weight="bold"
                 size={18}
                 onClick={() => FinishedStatus(props.name, "set", true)}
-                className="unchecked"
+                class="unchecked"
               />
             )
             : (
@@ -59,13 +59,13 @@ export default (props) => {
                 weight="fill"
                 size={20}
                 onClick={() => FinishedStatus(props.name, "set", false)}
-                className="checked"
+                class="checked"
               />
             )}
           <IoCloseCircle
             weight="fill"
             size={20}
-            className="closeTodoBtn"
+            class="closeTodoBtn"
             onClick={() => removeTodo(props.name)}
           />
         </div>
