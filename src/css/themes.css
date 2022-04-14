@@ -27,6 +27,7 @@
   --todoInputBg: #fff;
   --delTodosBtnBg: #414b57;
   --delTodosBtnFg: #fff;
+  --todoTitleBorder: #d3d3d3;
 }
 
 [data-theme="dark"] {
@@ -57,4 +58,5 @@
   --todoInputBg: #293032;
   --delTodosBtnBg: #31313b;
   --delTodosBtnFg: #77aed7;
+  --todoTitleBorder: #3f4648;
 }
