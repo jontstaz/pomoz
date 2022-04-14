@@ -8,6 +8,7 @@ const timer = createMutable(
     todaysProgress: 0,
     goalHrs: 5,
     volume: 90,
+    theme: "light",
   },
 );
 
@@ -24,9 +25,7 @@ if (localStorage.projects) {
   projects.list = tmp.split(",");
 }
 
-const todos = createMutable({
-  list: [],
-});
+const todos = createMutable({ list: [] });
 
 if (localStorage.todos) {
   todos.list = JSON.parse(localStorage.todos);

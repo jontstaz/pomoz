@@ -1,13 +1,17 @@
 import { switchTheme } from "../utils";
-import { createSignal } from "solid-js";
 
 import { Link } from "solid-app-router";
+import { RiSystemSettingsLine } from "solid-icons/ri";
+import {
+  BiNotepad,
+  BiSolidToggleLeft,
+  BiSolidToggleRight,
+} from "solid-icons/bi";
 
-import { RiSystemSettingsLine, RiWeatherMoonClearLine } from "solid-icons/ri";
-import { BiNotepad } from "solid-icons/bi";
 import { SiTarget } from "solid-icons/si";
 import { AiOutlineUser } from "solid-icons/ai";
 
+import { timer } from "../store";
 import "../css/navbar.css";
 
 function BrandInfo() {
@@ -21,60 +25,69 @@ function BrandInfo() {
   );
 }
 
-function NavbarLinks() {
-  let default_Theme = document.querySelector("body").dataset.theme;
-  const [theme, setTheme] = createSignal(default_Theme);
-
-  function addTheme() {
-    switch (theme()) {
-      case "light":
-        setTheme("dark");
-        switchTheme("dark");
-        break;
-
-      default:
-        setTheme("light");
-        switchTheme("light");
-    }
-  }
-
+function ThemeToggle() {
   return (
-    <div class="navBtns">
-      <RiWeatherMoonClearLine
+    <>
+      {timer.theme == "light" &&
+        (
+          <BiSolidToggleLeft
+            size={25}
+            class="themeToggle"
+            onclick={() => switchTheme("dark")}
+          />
+        )}
+
+      {timer.theme == "dark" &&
+        (
+          <BiSolidToggleRight
+            size={25}
+            class="themeToggle"
+            onclick={() => switchTheme("light")}
+          />
+        )}
+    </>
+  );
+}
+
+function NavbarLinks() {
+  return (
+    <div class="navbarLinks">
+      <Link href="/todos">
+        <div class="todosBtn">
+          <BiNotepad size={21} class="todosIcon" />
+          Todos
+        </div>
+      </Link>
+
+      {/* user Account -> login/logout stuff*/}
+      <AiOutlineUser
         size={21}
-        class="themeToggle"
-        onclick={() => addTheme()}
+        class="userIcon"
+        onclick={() => alert("WIP! data is stored in localstorage for now")}
       />
 
-      <div class="navbarLinks">
-        <Link href="/todos">
-          <div class="todosBtn">
-            <BiNotepad size={21} class="todosIcon" />
-            Todos
-          </div>
-        </Link>
+      <Link href="/settings">
+        <RiSystemSettingsLine size={21} class="settingsBtn" />
+      </Link>
+    </div>
+  );
+}
 
-        <AiOutlineUser
-          size={21}
-          class="userIcon"
-          onclick={() => alert("WIP! data is stored in localstorage for now")}
-        />
-
-        <Link href="/settings">
-          <RiSystemSettingsLine size={21} class="settingsBtn" />
-        </Link>
-      </div>
+function Btns() {
+  return (
+    <div class="navBtns">
+      <ThemeToggle />
+      <NavbarLinks />
     </div>
   );
 }
 
 // Navbar
-
 export default () => {
   return (
     <nav class="navbar">
       <BrandInfo />
-      <NavbarLinks />
+      <Btns />
     </nav>
   );
 };

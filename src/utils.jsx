@@ -23,6 +23,7 @@ function playSound(path) {
 function switchTheme(name) {
   document.body.dataset.theme = name;
   localStorage.setItem("theme", name);
+  timer.theme = name; // save to state
 }
 
 function minToHrs(num, fixed) {
