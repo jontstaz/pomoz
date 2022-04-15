@@ -37,7 +37,7 @@ export default (props) => {
     >
       <div class="projectName">
         <props.icon
-          size={20}
+          size={19}
           style={{ color: getColor(props.color) }}
         />
         {props.name}
@@ -49,7 +49,7 @@ export default (props) => {
         props.name != "Important" && props.name != "Low priority") &&
         (
           <IoCloseCircle
-            size={20}
+            size={19}
             weight="fill"
             style={{ color: "var(--red)" }}
             onClick={() => removeProject(props.name)}

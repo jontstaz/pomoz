@@ -1,8 +1,6 @@
-// import { AiOutlineFire } from "solid-icons/ai";
-import { HiSolidFire } from "solid-icons/hi";
-import { IoTodaySharp } from "solid-icons/io";
-// import { BsFolder2 } from 'solid-icons/bs'
-import { BiFolder } from 'solid-icons/bi'
+import { BiFolder, BiSolidHeartCircle } from "solid-icons/bi";
+import { FaDotCircle } from "solid-icons/fa";
+import { HiOutlineCalendar } from "solid-icons/hi";
 
 import { projects } from "../../store";
 import Project from "./project";
@@ -11,9 +9,13 @@ import Project from "./project";
 export default () => {
   return (
     <div class="projectLists">
-      <Project name="Today" icon={IoTodaySharp} color="blue" />
-      <Project name="Important" icon={HiSolidFire} color="red" />
-      <Project name="Low priority" icon={HiSolidFire} color="green" />
+      <Project name="Today" icon={HiOutlineCalendar} color="blue" />
+      <Project
+        name="Important"
+        icon={BiSolidHeartCircle}
+        color="red"
+      />
+      <Project name="Low priority" icon={FaDotCircle} color="green" />
 
       {/* user added projects*/}
       {projects.list.map((item) => <Project name={item} icon={BiFolder} />)}

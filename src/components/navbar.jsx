@@ -1,15 +1,14 @@
 import { switchTheme } from "../utils";
-
 import { Link } from "solid-app-router";
 import { RiSystemSettingsLine } from "solid-icons/ri";
 import {
   BiNotepad,
   BiSolidToggleLeft,
   BiSolidToggleRight,
+  BiUser,
 } from "solid-icons/bi";
 
 import { SiTarget } from "solid-icons/si";
-import { AiOutlineUser } from "solid-icons/ai";
 
 import { timer } from "../store";
 import "../css/navbar.css";
@@ -60,7 +59,7 @@ function NavbarLinks() {
       </Link>
 
       {/* user Account -> login/logout stuff*/}
-      <AiOutlineUser
+      <BiUser
         size={21}
         class="userIcon"
         onclick={() => alert("WIP! data is stored in localstorage for now")}
