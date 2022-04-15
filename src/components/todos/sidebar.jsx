@@ -61,7 +61,7 @@ export default () => {
           <ProjectInput closeInput={() => showInput(false)} />}
 
         <button class="newProjectBtn" onClick={() => showInput(true)}>
-          <IoAddCircle size={21} weight="fill" /> Add Project
+          <IoAddCircle size={21} weight="fill" /> Project
         </button>
       </div>
     </div>
