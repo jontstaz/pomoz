@@ -31,4 +31,6 @@ function minToHrs(num, fixed) {
   return num.toString().match(re)[0];
 }
 
+export const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
+
 export { getProgressValue, minToHrs, numToText, playSound, switchTheme };

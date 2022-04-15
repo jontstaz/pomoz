@@ -1,16 +1,15 @@
 import "../css/timer.css";
 import RadialBar from "./radialBar";
 
+// icons
 import { AiOutlinePause } from "solid-icons/ai";
-import { VscDebugRestart, VscDebugStart } from "solid-icons/vsc";
-
-import { getProgressValue, numToText, playSound } from "../utils";
+import { VscDebugRestart } from "solid-icons/vsc";
+import { BsPlayFill } from "solid-icons/bs";
+import { getProgressValue, numToText, playSound, utc } from "../utils";
+import { timer } from "../store";
 
 import tickSound from "../../assets/audio/tick.mp3";
 import timerSound from "../../assets/audio/timerSound.mp3";
-
-const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
-import { timer } from "../store";
 
 // reset todaysProgress on next day
 if (!localStorage.date || localStorage.date != utc) {
@@ -114,7 +113,7 @@ function ActionBtns() {
       {/* show play btn by default */}
 
       {timer.playBtn &&
-        <VscDebugStart onClick={start} class="playBtn" size={24} />}
+        <BsPlayFill onClick={start} class="playBtn" size={24} />}
 
       {/* hide playBtn and show pause btn in pauseMode*/}
 
