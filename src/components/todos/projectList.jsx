@@ -1,6 +1,6 @@
 import { BiFolder, BiSolidHeartCircle } from "solid-icons/bi";
 import { FaDotCircle } from "solid-icons/fa";
-import { HiOutlineCalendar } from "solid-icons/hi";
+import { IoTodayOutline } from 'solid-icons/io'
 
 import { projects } from "../../store";
 import Project from "./project";
@@ -9,7 +9,7 @@ import Project from "./project";
 export default () => {
   return (
     <div class="projectLists">
-      <Project name="Today" icon={HiOutlineCalendar} color="blue" />
+      <Project name="Today" icon={IoTodayOutline} color="blue" />
       <Project
         name="Important"
         icon={BiSolidHeartCircle}

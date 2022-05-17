@@ -98,7 +98,7 @@ function pause() {
 function reset() {
   clearInterval(interval);
 
-  document.title = "Pomochad";
+  document.title = "Pomoz";
   currentClick = "reset";
   pomoTime = totalTime * 60;
 

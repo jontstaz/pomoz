@@ -18,7 +18,7 @@ function BrandInfo() {
     <Link href="/">
       <div class="brand">
         <SiTarget size={24} class="brandLogo" />
-        <div class="brandTitle">Pomochad</div>
+        <div class="brandTitle">Pomoz</div>
       </div>
     </Link>
   );
