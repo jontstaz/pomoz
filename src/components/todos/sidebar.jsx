@@ -20,7 +20,7 @@ function ProjectInput() {
     }
 
     projects.list.push(tmpProject);
-    localStorage.setItem("projects", projects.list);
+    localStorage.setItem("projects", JSON.stringify(projects.list));
     showInput(false);
   }
 

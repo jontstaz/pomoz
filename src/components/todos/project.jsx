@@ -22,7 +22,7 @@ const removeProject = (item) => {
   const index = projects.list.indexOf(item);
 
   projects.list.splice(index, 1);
-  localStorage.setItem("projects", projects.list);
+  localStorage.setItem("projects", JSON.stringify(projects.list));
 
   removeProjectTodos(item);
 };

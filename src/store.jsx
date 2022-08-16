@@ -21,8 +21,7 @@ const projects = createMutable(
 );
 
 if (localStorage.projects) {
-  let tmp = localStorage.projects;
-  projects.list = tmp.split(",");
+  projects.list = JSON.parse(localStorage.projects);
 }
 
 const todos = createMutable({ list: [] });
